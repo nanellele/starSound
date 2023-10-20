@@ -15,9 +15,9 @@ const music = new Audio();
 const songs = [
     {
         path: 'assets/1.mp3',
-        displayName: '',
-        cover: '',
-        artist: '',
+        displayName: 'Song 1',
+        cover: 'assets/starry.jpg',
+        artist: 'Song 1',
     },
     {
         path: 'assets/1.mp3',
@@ -79,6 +79,21 @@ function updateProgressBar() {
     progress.style.width = `${progressPercent}%`;
 
     const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
-    durationEl.textContent = `${duration / 60}:${formatTime(duration % 60)}`;
-    currentTimeEl.textContent = `${currentTime / 60}:${formatTime(currentTime % 60)}`;
+    durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
+    currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(currentTime % 60)}`;
 }
+
+function setProgressBar (e) {
+    const width = playerProgress.clientWidth;
+    const clickX = e.offsetX;
+    music.currentTime = (clickX / width) * music.duration;
+}
+
+playBtn.addEventListener('click', togglePlay);
+prevBtn.addEventListener('click', () => changeMusic(-1));
+nextBtn.addEventListener('click', () => changeMusic(1));
+music.addEventListener('ended', () => changeMusic(1));
+music.addEventListener('timeupdate', updateProgressBar);
+playerProgress.addEventListener('click', setProgressBar);
+
+loadMusic(songs[musicIndex]);
