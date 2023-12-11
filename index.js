@@ -65,7 +65,6 @@ function playMusic() {
     isPlaying = true;
     playBtn.classList.replace('fa-play', 'fa-pause');
     playBtn.setAttribute('title', 'Pause');
-    looper = setInterval(updateProgressBar, 1000);
 }
 
 // Pause music
@@ -73,7 +72,6 @@ function pauseMusic() {
     isPlaying = false;
     playBtn.classList.replace('fa-pause', 'fa-play');
     playBtn.setAttribute('title', 'Play');
-    clearInterval(looper);
 }
 
 // Load music details (for both audio and YouTube video)
@@ -115,7 +113,6 @@ function onYouTubeIframeAPIReady() {
         playerVars: {
             playsinline: 1,
             'controls': 0,
-            'autoplay': 1,
             modestbranding: 1,
             origin: 'https://www.youtube.com'
         },
@@ -153,15 +150,17 @@ async function search(){
 
 // Update progress bar and display
 function updateProgressBar() {
-    const duration = player.playerInfo.progressState.duration;
-    const current = player.playerInfo.progressState.current;
-    const progressPercent = (current / duration) * 100;
-    progress.style.width = `${progressPercent}%`;
+    looper = setInterval(() => {
+        const duration = player.getDuration();
+        const current = player.getCurrentTime();
+        const progressPercent = (current / duration) * 100;
+        progress.style.width = `${progressPercent}%`;
 
-    const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
-    durationEl.innerText = `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
-    currentTimeEl.innerText = `${formatTime(current / 60)}:${formatTime(current % 60)}`;
+        const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
+        durationEl.innerText = `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
+        currentTimeEl.innerText = `${formatTime(current / 60)}:${formatTime(current % 60)}`;
 
+    }, 1000);
     // durationEl.textContent = formatTime(duration);
     // currentTimeEl.textContent = formatTime(current);
 }
@@ -176,12 +175,22 @@ function setProgressBar(e) {
 
 // Event handlers for YouTube player
 function onPlayerReady(e) {
-    // Optional: Logic when the YouTube player is ready
     player.setVolume(volume.value);
 }
 
+function startProgressBar() {
+    looper = setInterval(updateProgressBar, 1000);
+}
+
 function onPlayerStateChange(e) {
-    // Optional: Logic when the YouTube player's state changes
+    if(e.data === 3) {
+        startProgressBar();
+        playMusic();
+    }
+
+    if(e.data === 2) {
+        pauseMusic();
+    }
 }
 
 //scrolling effect for music title
@@ -219,6 +228,7 @@ loadMedia(media[musicIndex])
 
 function showResults(data) {
     document.getElementById("results").innerHTML = '';
+    document.getElementById("results").style.display = '';
     for (let i = 0; i < data.length; i++) {
       const result = data[i];
   
