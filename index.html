@@ -16,9 +16,10 @@
         <img src="assets/starry.jpg" id="bg-img">
     </div>
     <div class="container">
-                <!--  youtube player -->
-                <div id="player"></div>
-                <!--  ! youtube player -->
+        <!--  youtube player -->
+        <div class="youtube-container"><div id="player"></div></div>
+        <input type="range" min="1" max="100" value="30" class="volume" id="volume">
+        <!--  ! youtube player -->
         <div id="music-title-container">
         <h2 id="music-title"></h2>
         </div>
@@ -42,7 +43,17 @@
             <i onclick="search()" class="fa-solid fa-search" id="search-icon"></i>
         </div>
 
-
+        <div id="results"></div>
+        <div style="display: none">
+          <div id="template">
+            <div class="playvideo">
+              <img src="" alt="" />
+              <p>
+                <span class="title">title</span> by <span class="author">author</span>
+              </p>
+            </div>
+          </div>
+        </div>
 
 
     </div>

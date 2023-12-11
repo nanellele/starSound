@@ -66,6 +66,10 @@ body {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
+#player {
+    user-select: none;
+}
+
 .player-img img.active {
     width: 100%;
     height: 100%;
@@ -75,6 +79,7 @@ body {
 
 #music-title-container {
     overflow: hidden;
+    text-align: center;
     white-space: nowrap;
 }
 
@@ -82,9 +87,10 @@ h2 {
     font-size: 22px;
     text-align: center;
     font-weight: 500;
-    margin: 25px 0 0;
+    margin: 0;
     overflow: hidden;
     white-space: nowrap;
+    display: inline-block;
 }
 
 h3 {
@@ -168,10 +174,13 @@ h3 {
     opacity: 1;
 }
 
+.search-bar {
+    text-align: center;
+}
+
 #searchBox {
     position: relative;
-    top: 20px;
-    left: 80px;
+    left: 32px;
     width: 200px;
     border-radius: 20px;
     border: none;
@@ -184,16 +193,19 @@ h3 {
 
 #search-icon {
     position: relative;
-    top: 20px;
-    left: 80px;
+    left: 30px;
     border-radius: 20px;
     border: none;
     outline: none;
     padding: 0 5px;
     font-size: 16px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); */
+    color: white;
 }
+
+
+
 
 @keyframes scroll {
     from {
@@ -202,4 +214,51 @@ h3 {
     to {
         transform: translateX(-100%);
     }
+}
+
+#results {
+    width: 400px;
+    overflow: auto;
+    height: 200px;
+}
+
+#results div {
+    border-top-right-radius: 10px;
+}
+
+#results>div {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.playvideo {
+    background-color: #ebebeb6b;
+}
+
+.playvideo p {
+    float: right;
+    width: 65%;
+    user-select: none;
+    margin-top: 15px;
+}
+
+.playvideo img {
+    width: 30%;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #301255;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #19092c;
 }
