@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind:wght@500&family=Nunito&display=swap" rel="stylesheet">
     <title>starSound</title>
 </head>
@@ -15,11 +16,13 @@
         <img src="assets/starry.jpg" id="bg-img">
     </div>
     <div class="container">
-        <div class="player-img">
-            <img src="assets/starry.jpg" class="active" id="cover">
+                <!--  youtube player -->
+                <div id="player"></div>
+                <!--  ! youtube player -->
+        <div id="music-title-container">
+        <h2 id="music-title"></h2>
         </div>
-        <h2 id="music-title">Test</h2>
-        <h3 id="music-artist">Test h2</h3>
+        <h3 id="music-artist"></h3>
         <div class="player-progress" id="player-progress">
             <div class="progress" id="progress"></div>
             <div class="music-duration">
@@ -32,6 +35,11 @@
             <i class="fa-solid fa-backward" title="Previous" id="prev"></i>
             <i class="fa-solid fa-play play-button" title="Play" id="play"></i>
             <i class="fa-solid fa-forward" title="Next" id="next"></i>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search for a song..." id="searchBox">
+            <i onclick="search()" class="fa-solid fa-search" id="search-icon"></i>
         </div>
 
 
